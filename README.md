@@ -1,5 +1,12 @@
 # RN-Study
 
+### SQLite
+```
+create table UserInfo(id INTeger PRIMARY KEY AUTOINCREMENT, name VARCHAR(32), age INteger);
+```
+[RN SQLite 참고자료](https://medium.com/humanscape-tech/react-native%EC%97%90%EC%84%9C-sqlite-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-eb252c899eab)
+
+
 ### React Native 빌드 환경
 ```
 nodejs
