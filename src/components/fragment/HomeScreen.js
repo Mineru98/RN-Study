@@ -11,7 +11,7 @@ function LogoTitle() {
 	return (
 		<Image
 			style={{ width: 50, height: 50 }}
-			source={require('/workspace/RN-Study/assets/icon.png')}
+			source={require('/workspace/RN-Study/src/assets/icon.png')}
 		/>
 	);
 }
