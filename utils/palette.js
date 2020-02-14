@@ -1,16 +1,14 @@
-const Red = Symbol();
-const Orange = Symbol();
-const Yellow = Symbol();
-const Green = Symbol();
-const TealBlue = Symbol();
-const Blue = Symbol();
-const Purple = Symbol();
-const Pink = Symbol();
+export const Red = Symbol();
+export const Orange = Symbol();
+export const Yellow = Symbol();
+export const Green = Symbol();
+export const TealBlue = Symbol();
+export const Blue = Symbol();
+export const Purple = Symbol();
+export const Pink = Symbol();
 
-export default function palette(COLOR) {
-
+export function palette(COLOR) {
   switch(COLOR) {
-
     case Red:
         return "#ff3b30";
     case Orange:
@@ -28,5 +26,4 @@ export default function palette(COLOR) {
 	case Pink:
         return "#ff2d55";
   }
-
 }
