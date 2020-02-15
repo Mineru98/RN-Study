@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Image, Button } from 'react-native';
+import { Image, Button, StyleSheet, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeActivity } from '../activity/Home';
+import { HomeActivity, QrCodeScanner, FriendsActivity, QrGeneratorActivity } from '../activity/Home';
+
+import { CustomButton } from '../custom';
 import { Blue, palette } from '../../utils/palette';
 
 const Stack = createStackNavigator();
@@ -24,7 +26,7 @@ export default function HomeScreen({ navigation }) {
 					backgroundColor: '#ffffff'
 				},
 				headerTitleStyle: { color: '#000000', fontWeight: 'bold' },
-				headerTintColor: '#00ff00'
+				headerTintColor: '#000000'
 			}}
 		>
 			<Stack.Screen
@@ -33,15 +35,49 @@ export default function HomeScreen({ navigation }) {
 				options={{
 					title: '홈',
 					headerRight: () => (
-						<Button
-							onPress={() => alert('This is a button!')}
-							title="Info"
-							color="#fff"
-						/>
+						<View style={{flexDirection:"row"}}>
+							<CustomButton
+								type={2}
+								imgName={"ios-people"}
+								onPress={() => navigation.navigate('QrGeneratorActivity')}
+							/>
+							<CustomButton
+								type={1}
+								imgName={"qrcode-scan"}
+								onPress={() => navigation.navigate('ScannerActivity')}
+							/>
+						</View>
 					)
+				}}
+			/>
+			<Stack.Screen
+				name="ScannerActivity"
+				component={QrCodeScanner}
+				options={{
+					title: '스캐너',
+				}}
+			/>
+			<Stack.Screen
+				name="FriendsActivity"
+				component={FriendsActivity}
+				options={{
+					title: '친구',
+				}}
+			/>
+			<Stack.Screen
+				name="QrGeneratorActivity"
+				component={QrGeneratorActivity}
+				options={{
+					title: '친구',
 				}}
 			/>
 		</Stack.Navigator>
 	);
 }
+
+const styles = StyleSheet.create({
+  button: {
+	  color: 'red'
+  }
+});
 //<Stack.Screen name="HomeActivity" component={HomeActivity} options={{ headerTitle: props => <LogoTitle {...props} /> }}/>
