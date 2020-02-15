@@ -2,24 +2,55 @@ import React, { useState, useEffect } from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import { AppRegistry, StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 
-export default function Generator({navigation}) {
-	const [text, setText] = useState('https://github.com/Mineru98');
+export default function Generator({ navigation }) {
+	const [id, setId] = useState(1);
+	const [name, setName] = useState('name');
+	const [text, setText] = useState("id:1,name:'name'");
 	let logoFromFile = require('../../../assets/icon.png');
 
 	return (
 		<View style={styles.container}>
-			<TextInput style={styles.input} onChangeText={data => setText(data)} value={text} />
+			<TextInput
+				style={styles.input}
+				onChangeText={data => {
+					setId(data);
+					setText('id:' + id + ",name:'" + name + "'");
+				}}
+				value={id}
+			/>
+			<TextInput
+				style={styles.input}
+				onChangeText={data => {
+					setName(data);
+					setText('id:' + id + ",name:'" + name + "'");
+				}}
+				value={name}
+			/>
 			<TouchableOpacity
 				style={{
 					alignItems: 'center',
 					justifyContent: 'center'
 				}}
 				onPress={() => {
+					const obj = { id: 0, name: '' };
+					const arr = text.split(',');
+					obj.id = arr[0].split(':')[1];
+					obj.name = arr[1].split(':')[1];
+					// arr.forEach(element => {
+					// 	const i = element.split(':');
+					// 	console.log(i[1])
+					// });
 					navigation.goBack();
-					navigation.push('FriendsActivity', { data: text });
+					navigation.push('FriendsActivity', obj);
 				}}
 			>
-				<QRCode value={text} logoSize={30} logoBackgroundColor="transparent" />
+				<QRCode
+					size={200}
+					value={text}
+					logoSize={30}
+					color="#002a1b"
+					logoBackgroundColor="transparent"
+				/>
 			</TouchableOpacity>
 		</View>
 	);

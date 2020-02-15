@@ -3,17 +3,17 @@ import { Text, View, StyleSheet, Button, Animated, TouchableOpacity, Image } fro
 import { Permissions } from 'react-native-unimodules';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function QrCodeScanner({navigation}) {
+export default function QrCodeScanner({ navigation }) {
 	const [hasCameraPermission, setCameraPermission] = useState(null);
 	const [scanned, setScanned] = useState(false);
 	const [animationLineHeight, setAnimationLineHeight] = useState(0);
 	const [focusLineAnimation, setFocusLineAnimation] = useState(new Animated.Value(0));
-	
+
 	useEffect(() => {
 		getPermissionsAsync();
 		animateLine();
 	}, []);
-	
+
 	const animateLine = () => {
 		Animated.sequence([
 			Animated.timing(focusLineAnimation, {
@@ -26,21 +26,25 @@ export default function QrCodeScanner({navigation}) {
 			})
 		]).start(animateLine);
 	};
-	
+
 	const getPermissionsAsync = async () => {
 		const { status } = await Permissions.askAsync(Permissions.CAMERA);
 		const isPermissionGranted = status === 'granted';
 		console.log(isPermissionGranted);
 		setCameraPermission(isPermissionGranted);
 	};
-	
+
 	const handleBarCodeScanned = ({ type, data }) => {
 		setScanned(true);
-		navigation.goBack()
-		// alert(`${type}\n${data}`);
-		navigation.push('FriendsActivity', { data: data })
+		navigation.goBack();
+		const obj = { id: 0, name: '' };
+		const arr = data.split(',');
+		obj.id = arr[0].split(':')[1];
+		obj.name = arr[1].split(':')[1];
+		navigation.push('FriendsActivity', obj);
+		// navigation.push('FriendsActivity', { data: data })
 	};
-	
+
 	if (hasCameraPermission === null) {
 		return (
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -104,7 +108,7 @@ export default function QrCodeScanner({navigation}) {
 			</View>
 		</View>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	container: {

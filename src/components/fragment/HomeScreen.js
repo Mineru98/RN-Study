@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Image, Button, StyleSheet, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeActivity, QrCodeScanner, FriendsActivity, QrGeneratorActivity } from '../activity/Home';
+// import { HomeActivity, QrCodeScanner, FriendsActivity, QrGeneratorActivity } from '../activity/Home';// web 디버깅 시 주석 처리
+import { HomeActivity, FriendsActivity, QrGeneratorActivity } from '../activity/Home';// web 디버깅 시 사용
 
 import { CustomButton } from '../custom';
 import { Blue, palette } from '../../utils/palette';
@@ -52,7 +53,7 @@ export default function HomeScreen({ navigation }) {
 			/>
 			<Stack.Screen
 				name="ScannerActivity"
-				component={QrCodeScanner}
+				component={QrGeneratorActivity}
 				options={{
 					title: '스캐너',
 				}}
