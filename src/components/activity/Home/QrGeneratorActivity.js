@@ -3,9 +3,9 @@ import QRCode from 'react-native-qrcode-svg';
 import { AppRegistry, StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Generator({ navigation }) {
-	const [id, setId] = useState(1);
-	const [name, setName] = useState('name');
-	const [text, setText] = useState("id:1,name:'name'");
+	const [id, setId] = useState('1');
+	const [name, setName] = useState('임근석');
+	const [text, setText] = useState("UserId:1,Name:'임근석'");
 	let logoFromFile = require('../../../assets/icon.png');
 
 	return (
@@ -14,7 +14,7 @@ export default function Generator({ navigation }) {
 				style={styles.input}
 				onChangeText={data => {
 					setId(data);
-					setText('id:' + id + ",name:'" + name + "'");
+					setText('UserId:' + id + ",Name:'" + name + "'");
 				}}
 				value={id}
 			/>
@@ -22,7 +22,7 @@ export default function Generator({ navigation }) {
 				style={styles.input}
 				onChangeText={data => {
 					setName(data);
-					setText('id:' + id + ",name:'" + name + "'");
+					setText('UserId:' + id + ",Name:'" + name + "'");
 				}}
 				value={name}
 			/>
@@ -32,14 +32,10 @@ export default function Generator({ navigation }) {
 					justifyContent: 'center'
 				}}
 				onPress={() => {
-					const obj = { id: 0, name: '' };
+					const obj = { UserId: 0, Name: '' };
 					const arr = text.split(',');
-					obj.id = arr[0].split(':')[1];
-					obj.name = arr[1].split(':')[1];
-					// arr.forEach(element => {
-					// 	const i = element.split(':');
-					// 	console.log(i[1])
-					// });
+					obj.UserId = arr[0].split(':')[1];
+					obj.Name = arr[1].split(':')[1];
 					navigation.goBack();
 					navigation.push('FriendsActivity', obj);
 				}}

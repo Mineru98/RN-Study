@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, Animated, TouchableOpacity, Image } from 'react-native';
 import { Permissions } from 'react-native-unimodules';
@@ -37,12 +38,19 @@ export default function QrCodeScanner({ navigation }) {
 	const handleBarCodeScanned = ({ type, data }) => {
 		setScanned(true);
 		navigation.goBack();
-		const obj = { id: 0, name: '' };
+		const obj = { UserId: 0, Name: '' };
 		const arr = data.split(',');
-		obj.id = arr[0].split(':')[1];
-		obj.name = arr[1].split(':')[1];
-		navigation.push('FriendsActivity', obj);
-		// navigation.push('FriendsActivity', { data: data })
+		obj.UserId = arr[0].split(':')[1];
+		obj.Name = arr[1].split(':')[1].replace(/'/gi, '');
+		axios
+			.get(`https://server-daliy.run.goorm.io/api/user/qrcode/1/${obj.UserId}`)
+			.then(function(response) {
+				navigation.push('FriendsActivity', response.data);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		// navigation.push('FriendsActivity', obj);
 	};
 
 	if (hasCameraPermission === null) {

@@ -5,37 +5,174 @@ import {
 	FlatList,
 	ActivityIndicator,
 	Image,
-	TouchableOpacity
+	Text,
+	TouchableHighlight,
+	Dimensions,
+	Alert
 } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+import { Blue, palette } from '../../../utils/palette';
+
+const screenHeight = Math.round(Dimensions.get('window').height);
+const screenWidth = Math.round(Dimensions.get('window').width);
 
 export default class HomeActivity extends Component {
 	constructor() {
 		super();
 		this.state = {
-			dataSource: {}
+			dataSource: {},
+			_showAlert: false,
+			_showAlert2: false
 		};
 	}
+
 	componentDidMount() {
-		var that = this;
-		let items = Array.apply(null, Array(8)).map((v, i) => {
-			return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1)};
+		let items = Array.apply(null, Array(4)).map((v, i) => {
+			if (i == 0) {
+				return (
+					<View
+						style={{
+							flex: 1,
+							height: screenHeight * 0.35
+						}}
+					>
+						<TouchableHighlight
+							style={styles.ProfileLayout}
+							underlayColor="#024a30"
+							onPress={() => {
+								this.setState({
+									_showAlert: true,
+									_showAlert2: false
+								});
+							}}
+						>
+							<Text style={{ color: '#fff' }}> Profile </Text>
+						</TouchableHighlight>
+					</View>
+				);
+			} else if (i == 1) {
+				return (
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'row',
+							height: screenWidth * 0.5
+						}}
+					>
+						<TouchableHighlight
+							style={styles.PointLayout}
+							underlayColor="#024a30"
+							onPress={() => {
+								this.setState({
+									_showAlert: false,
+									_showAlert2: true
+								});
+							}}
+						>
+							<Text style={{ color: '#fff' }}> My Point </Text>
+						</TouchableHighlight>
+						<TouchableHighlight
+							style={styles.MyShopLayout}
+							underlayColor="#024a30"
+							onPress={() => {
+							}}
+						>
+							<Text style={{ color: '#fff' }}> {i} Test </Text>
+						</TouchableHighlight>
+					</View>
+				);
+			} else {
+				return (
+					<View
+						style={{
+							flex: 1,
+							flexDirection: 'row',
+							height: screenWidth * 0.5
+						}}
+					>
+						<TouchableHighlight
+							style={styles.PointLayout}
+							underlayColor="#024a30"
+							onPress={() => {
+							}}
+						>
+							<Text style={{ color: '#fff' }}> {i} Test </Text>
+						</TouchableHighlight>
+						<TouchableHighlight
+							style={styles.MyShopLayout}
+							underlayColor="#024a30"
+							onPress={() => {
+							}}
+						>
+							<Text style={{ color: '#fff' }}> {i} Test </Text>
+						</TouchableHighlight>
+					</View>
+				);
+			}
 		});
-		that.setState({
+		this.setState({
 			dataSource: items
 		});
 	}
 	render() {
+		const { _showAlert, _showAlert2 } = this.state;
+		
 		return (
-			<View style={styles.MainContainer}>
+			<View>
 				<FlatList
+					style={{ backgroundColor: '#fff' }}
 					data={this.state.dataSource}
 					renderItem={({ item }) => (
-						<View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-							<Image style={styles.imageThumbnail} source={{ uri: item.src }} />
-						</View>
+						<View style={{ flexDirection: 'column' }}>{item}</View>
 					)}
-					numColumns={2}
-					keyExtractor={(item, index) => index}
+					keyExtractor={(item, index) => index.toString()}
+				/>
+				<AwesomeAlert
+					show={_showAlert}
+					showProgress={false}
+					title="My Profile"
+					message="Description"
+					closeOnTouchOutside={true}
+					closeOnHardwareBackPress={false}
+					showCancelButton={true}
+					showConfirmButton={true}
+					cancelText="아니요"
+					confirmText="좋아요"
+					confirmButtonColor={palette(Blue)}
+					onCancelPressed={() => {
+						this.setState({
+							_showAlert: false
+						});
+					}}
+					onConfirmPressed={() => {
+						this.setState({
+							_showAlert: false
+						});
+					}}
+				/>
+				<AwesomeAlert
+					show={_showAlert2}
+					showProgress={false}
+					title="My Point"
+					message="Description"
+					closeOnTouchOutside={true}
+					closeOnHardwareBackPress={false}
+					showCancelButton={true}
+					showConfirmButton={true}
+					cancelText="아니요"
+					confirmText="좋아요"
+					confirmButtonColor={palette(Blue)}
+					onCancelPressed={() => {
+						this.setState({
+							_showAlert2: false
+						});
+					}}
+					onConfirmPressed={() => {
+						this.setState({
+							_showAlert2: false
+						});
+					}}
 				/>
 			</View>
 		);
@@ -43,15 +180,34 @@ export default class HomeActivity extends Component {
 }
 
 const styles = StyleSheet.create({
-	MainContainer: {
-		justifyContent: 'center',
-		flex: 1,
-		paddingTop: 0
-	},
-
-	imageThumbnail: {
+	ProfileLayout: {
+		borderWidth: 2,
+		borderRadius: 5,
+		borderColor: '#fff',
+		backgroundColor: '#002a1b',
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: 200
+		height: screenHeight * 0.35,
+		flex: 1
+	},
+	PointLayout: {
+		borderWidth: 2,
+		borderRadius: 5,
+		borderColor: '#fff',
+		backgroundColor: '#002a1b',
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 0.5,
+		height: screenWidth * 0.5
+	},
+	MyShopLayout: {
+		borderWidth: 2,
+		borderRadius: 5,
+		borderColor: '#fff',
+		backgroundColor: '#002a1b',
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 0.5,
+		height: screenWidth * 0.5
 	}
 });
