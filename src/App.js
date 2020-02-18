@@ -21,14 +21,11 @@ export default function App() {
 							if (route.name === '홈') {
 								iconName = focused ? 'ios-home' : 'ios-home';
 								return <Ionicons name={iconName} size={size} color={color} />;
-							} else if (route.name === '장보기') {
+							} else if (route.name === 'My') {
 								iconName = focused ? 'shop' : 'shop';
 								return <Entypo name={iconName} size={size} color={color} />;
 							} else if (route.name === '주문내역') {
 								iconName = focused ? 'ios-cart' : 'ios-cart';
-								return <Ionicons name={iconName} size={size} color={color} />;
-							} else if (route.name === '더보기') {
-								iconName = focused ? 'ios-settings' : 'ios-settings';
 								return <Ionicons name={iconName} size={size} color={color} />;
 							}
 						}
@@ -40,9 +37,8 @@ export default function App() {
 					}}
 				>
 					<Tab.Screen name="홈" component={HomeScreen} />
-					<Tab.Screen name="장보기" component={ShopScreen} />
 					<Tab.Screen name="주문내역" component={OrderScreen} />
-					<Tab.Screen name="더보기" component={SettingsScreen} />
+					<Tab.Screen name="My" component={SettingsScreen} />
 				</Tab.Navigator>
 			</NavigationContainer>
 	);

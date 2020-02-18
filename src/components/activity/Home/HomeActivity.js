@@ -63,12 +63,7 @@ export default class HomeActivity extends Component {
 						<TouchableHighlight
 							style={styles.PointLayout}
 							underlayColor="#024a30"
-							onPress={() => {
-								this.setState({
-									_showAlert: false,
-									_showAlert2: true
-								});
-							}}
+							onPress={() => navigation.navigate('PointActivity')}
 						>
 							<Text style={{ color: '#fff' }}> My Point </Text>
 						</TouchableHighlight>
