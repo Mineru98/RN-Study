@@ -72,10 +72,11 @@ export default function HomeScreen({ navigation }) {
 				}}
 			/>
 			<Stack.Screen
-				name="PointActivity"
-				component={PointActivity}
+				name="DetailProductActivity"
+				component={DetailProductActivity}
+				navigation={navigation}
 				options={{
-					title: '포인트',
+					title: '상품명',
 				}}
 			/>
 		</Stack.Navigator>

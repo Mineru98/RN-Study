@@ -1,8 +1,8 @@
 import HomeScreen from './HomeScreen';
 import OrderScreen from './OrderScreen';
-import SettingsScreen from './SettingsScreen';
+import MyScreen from './MyScreen';
 import ShopScreen from './ShopScreen';
 
-export { HomeScreen, OrderScreen, SettingsScreen, ShopScreen }
+export { HomeScreen, OrderScreen, MyScreen, ShopScreen }
 
 

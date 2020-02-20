@@ -7,10 +7,10 @@ import {
 	Image,
 	Text,
 	TouchableHighlight,
-	Dimensions,
-	Alert
+	Dimensions
 } from 'react-native';
-import AwesomeAlert from 'react-native-awesome-alerts';
+// import { withNavigation } from 'react-navigation';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { Blue, palette } from '../../../utils/palette';
 
@@ -22,36 +22,14 @@ export default class HomeActivity extends Component {
 		super();
 		this.state = {
 			dataSource: {},
-			_showAlert: false,
-			_showAlert2: false
+			dataSource2: {},
+			selectedIndex: 0
 		};
 	}
 
 	componentDidMount() {
-		let items = Array.apply(null, Array(4)).map((v, i) => {
-			if (i == 0) {
-				return (
-					<View
-						style={{
-							flex: 1,
-							height: screenHeight * 0.35
-						}}
-					>
-						<TouchableHighlight
-							style={styles.ProfileLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-								this.setState({
-									_showAlert: true,
-									_showAlert2: false
-								});
-							}}
-						>
-							<Text style={{ color: '#fff' }}> Profile </Text>
-						</TouchableHighlight>
-					</View>
-				);
-			} else if (i == 1) {
+		let items1 = Array.apply(null, Array(4)).map((v, i) => {
+			if (i != 10) {
 				return (
 					<View
 						style={{
@@ -63,21 +41,16 @@ export default class HomeActivity extends Component {
 						<TouchableHighlight
 							style={styles.PointLayout}
 							underlayColor="#024a30"
-							onPress={() => navigation.navigate('PointActivity')}
+							onPress={() => this.props.navigation.navigate('DetailProductActivity', {data:"상품"})}
 						>
-							<Text style={{ color: '#fff' }}> My Point </Text>
-						</TouchableHighlight>
-						<TouchableHighlight
-							style={styles.MyShopLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-							}}
-						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
+							<Text style={{ color: '#fff' }}> 상품 {i} </Text>
 						</TouchableHighlight>
 					</View>
 				);
-			} else {
+			}
+		});
+		let items2 = Array.apply(null, Array(4)).map((v, i) => {
+			if (i != 10) {
 				return (
 					<View
 						style={{
@@ -89,86 +62,77 @@ export default class HomeActivity extends Component {
 						<TouchableHighlight
 							style={styles.PointLayout}
 							underlayColor="#024a30"
-							onPress={() => {
-							}}
+							onPress={() => this.props.navigation.navigate('DetailProductActivity', {data:"업체"})}
 						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
-						</TouchableHighlight>
-						<TouchableHighlight
-							style={styles.MyShopLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-							}}
-						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
+							<Text style={{ color: '#fff' }}> 업체 {i} </Text>
 						</TouchableHighlight>
 					</View>
 				);
 			}
 		});
 		this.setState({
-			dataSource: items
+			dataSource1: items1,
+			dataSource2: items2
 		});
 	}
+
+	handleIndexChange = index => {
+		this.setState({
+			selectedIndex: index
+		});
+	};
+
 	render() {
-		const { _showAlert, _showAlert2 } = this.state;
-		
+		const { selectedIndex } = this.state;
 		return (
 			<View>
-				<FlatList
-					style={{ backgroundColor: '#fff' }}
-					data={this.state.dataSource}
-					renderItem={({ item }) => (
-						<View style={{ flexDirection: 'column' }}>{item}</View>
-					)}
-					keyExtractor={(item, index) => index.toString()}
-				/>
-				<AwesomeAlert
-					show={_showAlert}
-					showProgress={false}
-					title="My Profile"
-					message="Description"
-					closeOnTouchOutside={true}
-					closeOnHardwareBackPress={false}
-					showCancelButton={true}
-					showConfirmButton={true}
-					cancelText="아니요"
-					confirmText="좋아요"
-					confirmButtonColor={palette(Blue)}
-					onCancelPressed={() => {
-						this.setState({
-							_showAlert: false
-						});
-					}}
-					onConfirmPressed={() => {
-						this.setState({
-							_showAlert: false
-						});
-					}}
-				/>
-				<AwesomeAlert
-					show={_showAlert2}
-					showProgress={false}
-					title="My Point"
-					message="Description"
-					closeOnTouchOutside={true}
-					closeOnHardwareBackPress={false}
-					showCancelButton={true}
-					showConfirmButton={true}
-					cancelText="아니요"
-					confirmText="좋아요"
-					confirmButtonColor={palette(Blue)}
-					onCancelPressed={() => {
-						this.setState({
-							_showAlert2: false
-						});
-					}}
-					onConfirmPressed={() => {
-						this.setState({
-							_showAlert2: false
-						});
-					}}
-				/>
+				<View style={{ margin: 10, marginTop: 5, marginBottom: 5 }}>
+					<SegmentedControlTab
+						values={['상품', '업체']}
+						selectedIndex={selectedIndex}
+						onTabPress={this.handleIndexChange}
+					/>
+				</View>
+
+				{selectedIndex == 0 ? (
+					<View
+						style={{
+							flex: 1,
+							justifyContent: 'center',
+							alignItems: 'center',
+							flexDirection: 'row',
+							margin: 8
+						}}
+					>
+						<FlatList
+							style={{ backgroundColor: '#fff' }}
+							data={this.state.dataSource1}
+							renderItem={({ item }) => (
+								<View style={{ flexDirection: 'column' }}>{item}</View>
+							)}
+							keyExtractor={(item, index) => index.toString()}
+						/>
+					</View>
+				) : (
+					<View
+						style={{
+							flex: 1,
+							justifyContent: 'center',
+							alignItems: 'center',
+							flexDirection: 'row',
+							margin: 8
+						}}
+					>
+						<FlatList
+							style={{ backgroundColor: '#fff' }}
+							data={this.state.dataSource2}
+							renderItem={({ item }) => (
+								<View style={{ flexDirection: 'column' }}>{item}</View>
+							)}
+							keyExtractor={(item, index) => index.toString()}
+						/>
+					</View>
+				)}
 			</View>
 		);
 	}
@@ -192,8 +156,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#002a1b',
 		justifyContent: 'center',
 		alignItems: 'center',
-		flex: 0.5,
-		height: screenWidth * 0.5
+		flex: 1,
+		height: screenWidth * 0.3
 	},
 	MyShopLayout: {
 		borderWidth: 2,

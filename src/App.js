@@ -1,13 +1,13 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
+import 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import { Text, View, Platform } from 'react-native';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons, Entypo } from '@expo/vector-icons';
 
-import { HomeScreen, ShopScreen, OrderScreen, SettingsScreen } from './components/fragment';
 import { Blue, palette } from './utils/palette';
+import { HomeScreen, ShopScreen, OrderScreen, MyScreen } from './components/fragment';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +38,7 @@ export default function App() {
 				>
 					<Tab.Screen name="홈" component={HomeScreen} />
 					<Tab.Screen name="주문내역" component={OrderScreen} />
-					<Tab.Screen name="My" component={SettingsScreen} />
+					<Tab.Screen name="My" component={MyScreen} />
 				</Tab.Navigator>
 			</NavigationContainer>
 	);
