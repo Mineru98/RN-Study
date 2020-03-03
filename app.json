@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Daliy",
-    "slug": "Daliy",
+    "name": "Daily",
+    "slug": "Daily",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -27,7 +27,7 @@
       "supportsTablet": true
     },
     "packagerOpts": {
-      "port": 57179
+      "port": 50327
     }
   }
 }

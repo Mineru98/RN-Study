@@ -43,7 +43,7 @@ export default function QrCodeScanner({ navigation }) {
 		obj.UserId = arr[0].split(':')[1];
 		obj.Name = arr[1].split(':')[1].replace(/'/gi, '');
 		axios
-			.get(`https://server-daliy.run.goorm.io/api/user/qrcode/1/${obj.UserId}`)
+			.get(`https://server-Daily.run.goorm.io/api/user/qrcode/1/${obj.UserId}`)
 			.then(function(response) {
 				navigation.push('FriendsActivity', response.data);
 			})

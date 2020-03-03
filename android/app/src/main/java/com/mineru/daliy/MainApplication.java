@@ -1,4 +1,4 @@
-package com.mineru.daliy;
+package com.mineru.Daily;
 
 import android.app.Application;
 

@@ -63,7 +63,7 @@ export default class MyActivity extends Component {
 						<TouchableHighlight
 							style={styles.PointLayout}
 							underlayColor="#024a30"
-							onPress={() => navigation.navigate('PointActivity')}
+							onPress={() => this.props.navigation.navigate('PointActivity')}
 						>
 							<Text style={{ color: '#fff' }}> My Point </Text>
 						</TouchableHighlight>
