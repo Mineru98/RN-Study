@@ -5,8 +5,8 @@ clear;
 if [ ! -z "56833" -a ! -z "59201" ];
 then
 set -a && REACT_NATIVE_PACKAGER_HOSTNAME="15.165.76.124" && set +a
-echo "{ manifestPort: 56833 }" > /workspace/RN-Study/.exprc
-jq ".expo.packagerOpts.port=59201" /workspace/RN-Study/app.json > _tmp.json && mv _tmp.json /workspace/RN-Study/app.json
+echo "{ manifestPort: 56833 }" > ./.exprc
+jq ".expo.packagerOpts.port=59201" ./app.json > _tmp.json && mv _tmp.json ./app.json
 socat TCP4-LISTEN:19000,reuseaddr,fork TCP4:127.0.0.1:56833 &
 socat TCP4-LISTEN:19001,reuseaddr,fork TCP4:127.0.0.1:59201 &
 cd /workspace/RN-Study && clear
