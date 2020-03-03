@@ -28,7 +28,7 @@ export default class MyActivity extends Component {
 	}
 
 	componentDidMount() {
-		let items = Array.apply(null, Array(2)).map((v, i) => {
+		let items = Array.apply(null, Array(4)).map((v, i) => {
 			if (i == 0) {
 				return (
 					<View
@@ -39,7 +39,7 @@ export default class MyActivity extends Component {
 					>
 						<TouchableHighlight
 							style={styles.ProfileLayout}
-							underlayColor="#024a30"
+							underlayColor="#E5E5E5"
 							onPress={() => {
 								this.setState({
 									_showAlert: true,
@@ -47,60 +47,74 @@ export default class MyActivity extends Component {
 								});
 							}}
 						>
-							<Text style={{ color: '#fff' }}> Profile </Text>
+							<View>
+								<Image
+									source={require('../../../assets/icon-user.png')}
+									style={{ width: 75, height: 75, borderRadius: 75 / 2 }}
+								/>
+								<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> Profile </Text>
+							</View>
+							
 						</TouchableHighlight>
 					</View>
 				);
 			} else if (i == 1) {
 				return (
-					<View
-						style={{
-							flex: 1,
-							flexDirection: 'row',
-							height: screenWidth * 0.5
-						}}
-					>
+					<View>
 						<TouchableHighlight
-							style={styles.PointLayout}
-							underlayColor="#024a30"
-							onPress={() => this.props.navigation.navigate('PointActivity')}
+							style={styles.SettingLayout}
+							underlayColor="#E5E5E5"
+							onPress={() => this.props.navigation.navigate('SettingActivity')}
 						>
-							<Text style={{ color: '#fff' }}> My Point </Text>
-						</TouchableHighlight>
-						<TouchableHighlight
-							style={styles.MyShopLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-							}}
-						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
+							<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> 설정 </Text>
 						</TouchableHighlight>
 					</View>
 				);
-			} else {
+			} else if (i == 2) {
 				return (
-					<View
-						style={{
-							flex: 1,
-							flexDirection: 'row',
-							height: screenWidth * 0.5
-						}}
-					>
+					<View>
 						<TouchableHighlight
-							style={styles.PointLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-							}}
+							style={styles.SettingLayout}
+							underlayColor="#E5E5E5"
+							onPress={() => this.props.navigation.navigate('ChangeActivity')}
 						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
+							<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> 판매자/사용자 전환 </Text>
 						</TouchableHighlight>
+					</View>
+				);
+			} else if (i == 3) {
+				return (
+					<View>
 						<TouchableHighlight
-							style={styles.MyShopLayout}
-							underlayColor="#024a30"
-							onPress={() => {
-							}}
+							style={styles.SettingLayout}
+							underlayColor="#E5E5E5"
+							onPress={() => {}}
 						>
-							<Text style={{ color: '#fff' }}> {i} Test </Text>
+							<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> 고객센터 </Text>
+						</TouchableHighlight>
+					</View>
+				);
+			} else if (i == 4) {
+				return (
+					<View>
+						<TouchableHighlight
+							style={styles.SettingLayout}
+							underlayColor="#E5E5E5"
+							onPress={() => {}}
+						>
+							<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> My Shop </Text>
+						</TouchableHighlight>
+					</View>
+				);
+			} else if (i == 5) {
+				return (
+					<View>
+						<TouchableHighlight
+							style={styles.SettingLayout}
+							underlayColor="#E5E5E5"
+							onPress={() => {}}
+						>
+							<Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}> 업주모드 </Text>
 						</TouchableHighlight>
 					</View>
 				);
@@ -116,10 +130,9 @@ export default class MyActivity extends Component {
 		return (
 			<View>
 				<FlatList
-					style={{ backgroundColor: '#fff' }}
 					data={this.state.dataSource}
 					renderItem={({ item }) => (
-						<View style={{ flexDirection: 'column' }}>{item}</View>
+						<View style={{ flexDirection: 'column', backgroundColor: '#F2F2F2' }}>{item}</View>
 					)}
 					keyExtractor={(item, index) => index.toString()}
 				/>
@@ -146,29 +159,6 @@ export default class MyActivity extends Component {
 						});
 					}}
 				/>
-				<AwesomeAlert
-					show={_showAlert2}
-					showProgress={false}
-					title="My Point"
-					message="Description"
-					closeOnTouchOutside={true}
-					closeOnHardwareBackPress={false}
-					showCancelButton={true}
-					showConfirmButton={true}
-					cancelText="아니요"
-					confirmText="좋아요"
-					confirmButtonColor={palette(Blue)}
-					onCancelPressed={() => {
-						this.setState({
-							_showAlert2: false
-						});
-					}}
-					onConfirmPressed={() => {
-						this.setState({
-							_showAlert2: false
-						});
-					}}
-				/>
 			</View>
 		);
 	}
@@ -176,33 +166,22 @@ export default class MyActivity extends Component {
 
 const styles = StyleSheet.create({
 	ProfileLayout: {
-		borderWidth: 2,
 		borderRadius: 5,
 		borderColor: '#fff',
-		backgroundColor: '#002a1b',
-		justifyContent: 'center',
-		alignItems: 'center',
+		backgroundColor: '#fff',
+		margin: 5,
 		height: screenHeight * 0.35,
 		flex: 1
 	},
-	PointLayout: {
-		borderWidth: 2,
+	SettingLayout: {
 		borderRadius: 5,
 		borderColor: '#fff',
-		backgroundColor: '#002a1b',
+		backgroundColor: '#fff',
 		justifyContent: 'center',
-		alignItems: 'center',
-		flex: 0.5,
-		height: screenWidth * 0.5
-	},
-	MyShopLayout: {
-		borderWidth: 2,
-		borderRadius: 5,
-		borderColor: '#fff',
-		backgroundColor: '#002a1b',
-		justifyContent: 'center',
-		alignItems: 'center',
-		flex: 0.5,
+		alignItems: 'right',
+		padding: 20,
+		margin: 5,
+		flex: 1,
 		height: screenWidth * 0.5
 	}
 });

@@ -41,16 +41,8 @@ export default function QrCodeScanner({ navigation }) {
 		const obj = { UserId: 0, Name: '' };
 		const arr = data.split(',');
 		obj.UserId = arr[0].split(':')[1];
-		obj.Name = arr[1].split(':')[1].replace(/'/gi, '');
-		axios
-			.get(`https://server-Daily.run.goorm.io/api/user/qrcode/1/${obj.UserId}`)
-			.then(function(response) {
-				navigation.push('FriendsActivity', response.data);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-		// navigation.push('FriendsActivity', obj);
+		obj.Name = arr[1].split(':')[1].replace( /'/gi, '');
+		navigation.push('FriendsActivity', obj);
 	};
 
 	if (hasCameraPermission === null) {

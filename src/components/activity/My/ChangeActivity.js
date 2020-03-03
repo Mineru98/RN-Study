@@ -1,14 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import { View, Text } from 'react-native';
 
-export default function DetailProductActivity({ route, navigation }) {
-	let data = route.params.data || 0;
+export default function ChangeActivity({ route, navigation }) {
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>
-				{data}
-			</Text>
+			<Text> 사용자 전환 </Text>
 		</View>
 	);
 }
