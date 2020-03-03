@@ -8,15 +8,15 @@ import { CustomButton } from '../custom';
 
 const Stack = createStackNavigator();
 
-// 이런식으로 적용 가능
-function LogoTitle() {
-	return (
-		<Image
-			style={{ width: 50, height: 50 }}
-			source={require('/workspace/RN-Study/src/assets/icon.png')}
-		/>
-	);
-}
+// // 이런식으로 적용 가능
+// function LogoTitle() {
+// 	return (
+// 		<Image
+// 			style={{ width: 50, height: 50 }}
+// 			source={require('/workspace/RN-Study/src/assets/icon.png')}
+// 		/>
+// 	);
+// }
 
 export default function HomeScreen({ navigation }) {
 	return (
