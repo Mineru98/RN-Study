@@ -1,24 +1,16 @@
-# RN-Study
-
-### SQLite
+# 설치
 ```
-create table UserInfo(id INTeger PRIMARY KEY AUTOINCREMENT, name VARCHAR(32), age INteger);
-```
-[RN SQLite 참고자료](https://medium.com/humanscape-tech/react-native%EC%97%90%EC%84%9C-sqlite-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-eb252c899eab)
-
-### Android Key Generate
-```
-keytool -genkeypair -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-```
-
-
-### App Icon Generator
-```
-yarn add -D @bam.tech/react-native-make
-
-react-native set-icon --path [path-to-image] --background ["color"]
-react-native set-icon --path ./src/Assets/images/app_icon.png --background "#FFFFFF"
-
-react-native set-splash --path [path-to-image] --resize [contain|cover|center] --background ["background-color"]
-react-native set-splash --path ./src/Assets/images/splash.png --resize center --background "#FFFFFF"
+npx expo install @react-native-async-storage/async-storage@1.18.2
+npx expo install @react-native-masked-view/masked-view@0.2.9
+npx expo install @react-navigation/bottom-tabs@^6.5.11
+npx expo install @react-navigation/native@^6.1.9
+npx expo install @react-navigation/stack@^6.3.20
+npx expo install nativewind@^2.0.11
+npx expo install react-native-vector-icons@^9.2.0
+npx expo install react-native-gesture-handler@^2.6.1
+npx expo install react-native-reanimated@^2.14.4
+npx expo install react-native-safe-area-context@^4.5.0
+npx expo install react-native-screens@^3.15.0
+npx expo install react-native-splash-screen@^3.3.0
+npx expo install react-navigation-helpers@^2.1.0
 ```
